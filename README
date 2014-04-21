@@ -16,3 +16,20 @@ The project is currently being advanced by a group of students at Dartmouth Coll
 The images used in this demo are not intended for use in any derivative production. They were gathered from the web link below, and should only be used to demo the software.
 
 image source: http://www.spriters-resource.com/game_boy_advance/pokeem/
+
+installation
+=============
+
+FlashRPG was developed with FlashDevelop. It may be possible to compile these source files with another IDE, but I cannot guarantee that it will work.
+
+To start working with FlashRPG follow these steps:
+
+1) follow the steps on the following website to setup FlashDevelop:
+   http://useflashpunk.net/getting-started/setting-up-flashdevelop.html
+   except:
+   -instead of naming your new project 'Hello World', name it whatever you want your game to be called
+   -note that you can use any version of the Flash Debugger - you do not have to find v10
+
+2) Copy and paste the contents of this repository into the 'src' folder of your new project. Overwrite any conflicts.
+
+3) Build and Run! Your now good to go and free to edit anything.
