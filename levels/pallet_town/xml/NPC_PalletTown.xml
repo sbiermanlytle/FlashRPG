@@ -1,0 +1,15 @@
+<NPCs>
+	<NPC id="1" Name="Mom">
+		<intro ref="NPC.1.intro"/>
+		<line ref="NPC.1.line1">
+			<response ref="NPC.1.response1">
+				<line ref="NPC.1.line1.1">
+					<response ref="NPC.1.response1.1"/>
+				</line>
+				<line ref="NPC.1.line1.2"/>
+				<line ref="NPC.0.goodbye3"/>
+			</response>
+		</line>
+		<line ref="NPC.0.goodbye2"/>
+	</NPC>
+</NPCs>

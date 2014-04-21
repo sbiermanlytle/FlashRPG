@@ -1,0 +1,19 @@
+<strings>
+	<element ref="NPC.0.goodbye1" value="I'll talk to you later." />
+	<element ref="NPC.0.goodbye2" value="Nice to see you, I'll be going now." />
+	<element ref="NPC.0.goodbye3" value="[walk away]" />
+	<element ref="NPC.0.goodbye4" value="I'll catch you later." />
+	<element ref="NPC.0.goodbye5" value="Hey sorry, but I got to go right now." />
+	
+	<element ref="NPC.1.intro" value="Hello!" />
+		<element ref="NPC.1.line1" value="What are you doing?" />
+			<element ref="NPC.1.response1" value="Just walking around in circles, doing nothing really!" />
+				<element ref="NPC.1.line1.1" value="That sounds fun." />
+					<element ref="NPC.1.response1.1" value="It really is!" />
+				<element ref="NPC.1.line1.2" value="That's kinda weird." />
+	
+	<element ref="sign.1" value="Your House" x="15" y="12" />
+	<element ref="sign.2" value="Some other persons house" x="20" y="12" />
+	<element ref="sign.3" value="Pallet Town Square" x="23" y="17" />
+	<element ref="sign.4" value="Pallet Town Lab" x="14" y="21" />
+</strings>
