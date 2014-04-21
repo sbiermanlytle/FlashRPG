@@ -8,7 +8,7 @@ FlashRPG is a library of AS3 files that provide the shell of an RPG Game.
 FlashRPG relies on Flashpunk 1.4, which is included in this release.
 
 Live Demo: http://dandelion.iioengine.com/beta.php
-move with the arrow keys
+move with the arrow keys or asdw
 interact with npcs and signs with e
 
 The project is currently being advanced by a group of students at Dartmouth College who are developing an immersive Role Playing Game that teaches English to Chinese students. We will open the game up to the world when it is complete, but we are currently working directly with the Dandelion School in Beijing to provide more learning opportunities for their students. To learn more about the Dandelion Project, visit our website: http://sites.dartmouth.edu/dandelion/
