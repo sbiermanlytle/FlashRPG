@@ -27,8 +27,10 @@ To start working with FlashRPG follow these steps:
 1) follow the steps on the following website to setup FlashDevelop:
    http://useflashpunk.net/getting-started/setting-up-flashdevelop.html
    except:
-   -instead of naming your new project 'Hello World', name it whatever you want your game to be called
-   -note that you can use any version of the Flash Debugger - you do not have to find v10
+   -instead of naming your new project 'Hello World', 
+    name it whatever you want your game to be called
+   -note that you can use any version of the Flash Debugger.
+    You do not have to find v10
 
 2) Copy and paste the contents of this repository into the 'src' folder of your new project. Overwrite any conflicts.
 
