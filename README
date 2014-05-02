@@ -7,11 +7,10 @@ FlashRPG is a library of AS3 files that provide the shell of an RPG Game.
 
 FlashRPG relies on Flashpunk 1.4, which is included in this release.
 
-Live Demo: http://dandelion.iioengine.com/beta.php
-move with the arrow keys or asdw
-interact with npcs and signs with e
+Live Demo: http://dandelionenglish.org/students/
+scroll to the bottom of the page
 
-The project is currently being advanced by a group of students at Dartmouth College who are developing an immersive Role Playing Game that teaches English to Chinese students. We will open the game up to the world when it is complete, but we are currently working directly with the Dandelion School in Beijing to provide more learning opportunities for their students. To learn more about the Dandelion Project, visit our website: http://sites.dartmouth.edu/dandelion/
+FlashRPG is currently being advanced by a group of students at Dartmouth College who are developing an immersive Role Playing Game that teaches English to Chinese students. We will open the game up to the world when it is complete, but we are currently working directly with the Dandelion School in Beijing to test and improve the application. To learn more about the Dandelion Project, visit our website: http://dandelionenglish.org
 
 The images used in this demo are not intended for use in any derivative production. They were gathered from the web link below, and should only be used to demo the software.
 
@@ -20,7 +19,7 @@ image source: http://www.spriters-resource.com/game_boy_advance/pokeem/
 installation
 =============
 
-FlashRPG was developed with FlashDevelop. It may be possible to compile these source files with another IDE, but I cannot guarantee that it will work.
+FlashRPG is being developed with FlashDevelop. It may be possible to compile these source files with another IDE, but I cannot guarantee that it will work.
 
 To start working with FlashRPG follow these steps:
 
@@ -35,3 +34,28 @@ To start working with FlashRPG follow these steps:
 2) Copy and paste the contents of this repository into the 'src' folder of your new project. Overwrite any conflicts.
 
 3) Build and Run! Your now good to go and free to edit anything.
+
+notes
+=====
+
+There is not very much code, so I will give an overview instead of a full API.
+
+Main - the entry point of the application. It sets the screen resolution and creates a new 'GameWorld'.
+
+GameWorld - the main function of FlashRPG. GameWorld is initialized with a level to fill out its data, then it controls all input, UI changes, and character interactions.
+
+Level - the parent object of a Level. Contains references to tile data and dialogue strings.
+
+Level_PalletTown - an example of a Level child. Contains references to level specific xml data and images, and implements essential functions.
+
+Character - the parent object for all Players and NPCs. Contains state information and manipulation functions.
+
+Player - the player character, contains a reference to the player image
+
+NPC - an object containing Non-Player-Character images and data.
+
+MapAnimation - an object used for any animating tiles on the map.
+
+TextBubble - the black popup shown when an interaction starts.
+
+TextObject - a line of text in a 'TextBubble'
