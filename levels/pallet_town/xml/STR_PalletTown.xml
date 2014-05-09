@@ -5,12 +5,33 @@
 	<element ref="NPC.0.goodbye4" value="I'll catch you later." />
 	<element ref="NPC.0.goodbye5" value="Hey sorry, but I got to go right now." />
 	
-	<element ref="NPC.1.intro" value="Hello!" />
-		<element ref="NPC.1.line1" value="What are you doing?" />
-			<element ref="NPC.1.response1" value="Just walking around in circles, doing nothing really!" />
-				<element ref="NPC.1.line1.1" value="That sounds fun." />
-					<element ref="NPC.1.response1.1" value="It really is!" />
-				<element ref="NPC.1.line1.2" value="That's kinda weird." />
+	<element ref="NPC.1.line.1" value="Hello!" />
+	<element ref="NPC.1.response.1" value="What are you doing?" />
+		<element ref="NPC.1.line.1.1" value="Just walking around in circles, doing nothing really!" />
+		<element ref="NPC.1.response.1.1" value="That sounds fun." />
+			<element ref="NPC.1.line.1.1.1" value="It really is!" />
+		<element ref="NPC.1.response.1.2" value="That's kinda weird." />
+			<element ref="NPC.1.line.1.2.1" value="Don't judge me." />
+			<element ref="NPC.1.response.1.2.1" value="I'm judging you hardcore" />
+				<element ref="NPC.1.line.1.2.1.1" value="Leave me!" />
+		
+	<element ref="NPC.2.line.1" value="No, No, where did I put that textbook?" />
+	<element ref="NPC.2.response.1" value="What book are you looking for?" />
+		<element ref="NPC.2.line.1.1" value="asdfewawefaw" />
+	<element ref="NPC.2.response.2" value="aweoijfawoiejfwefawfew" />
+		<element ref="NPC.2.line.2.1" value="AEFAWEFAWEF" />
+		
+	<element ref="NPC.3.line.1" value="This homework is really boring." />
+	<element ref="NPC.3.response.1" value="Why don't you take a break?" />
+		
+	<element ref="NPC.4.line.1" value="Wow, it's really nice outside today!" />
+	<element ref="NPC.4.response.1" value="Yeah, the flowers are really pretty too." />
+		
+	<element ref="NPC.5.line.1" value="Welcome to the Pallet Town Lab. How may I help you?"/>
+	<element ref="NPC.5.response.1" value="What is this place?" />
+		
+	<element ref="NPC.6.line.1" value="Hello there. How are you doing today?" />
+	<element ref="NPC.6.response.1" value="I'm great! How about you?" />
 	
 	<element ref="sign.1" value="Your House" x="15" y="12" />
 	<element ref="sign.2" value="Some other persons house" x="20" y="12" />

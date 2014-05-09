@@ -107,7 +107,7 @@ package  {
 			var dataElement:XML;
 			var dataList:XMLList = mStrings.element;
 			for each (dataElement in dataList)
-				if (String(dataElement.@ref) == key)
+				if (String(dataElement.@ref).slice(0, String(dataElement.@ref).length - 2) == key)
 					return dataElement.@value;
 			return "No String Found!!";
 		}
@@ -117,7 +117,7 @@ package  {
 			var dataList:XMLList = mStrings.element;
 			var strings:Array = new Array();
 			for each (dataElement in dataList)
-				if (String(dataElement.@ref).slice(0, String(dataElement.@ref).length - 1) == root)
+				if (String(dataElement.@ref).slice(0, String(dataElement.@ref).length - 2) == root)
 					strings.push(String(dataElement.@value));
 			var key:int = int(Math.random() * 5 + 1);
 			for each (dataElement in dataList)

@@ -28,6 +28,13 @@ package  {
 		private var mNPCDialogueBubble:TextBubble;
 		private var mPlayerDialogueBubble:TextBubble;
 		private var mTalkingNPCKey:int;
+		private var mDialogueLevel:int;
+		private var mDialoguePath:Array = new Array();
+		private var mPlayerDialogueReference:String;
+		private var mNPCDialogueReference:String;
+		private var mKeyBeingPressed:Boolean = false;
+		
+		
 		
 		public function GameWorld() {
 			mMapAnimations = new Array();
@@ -73,12 +80,26 @@ package  {
 					handleActionKey();
 			}
 			else if (mPlayer.isTalking) {
-				if (Input.check(Key.ENTER) || Input.check(Key.D))
-					handleDialogue();
-				else if (Input.check(Key.W) || Input.check(Key.UP))
-					mPlayerDialogueBubble.changeTextSelection(true);
-				else if (Input.check(Key.S) || Input.check(Key.DOWN))
-					mPlayerDialogueBubble.changeTextSelection(false);
+				if (Input.check(Key.ENTER) || Input.check(Key.D)){
+					if (mKeyBeingPressed == false) {
+						handleDialogue();
+						mKeyBeingPressed = true;
+					}
+				}
+				else if (Input.check(Key.W) || Input.check(Key.UP)){
+					if (mKeyBeingPressed == false){
+						mPlayerDialogueBubble.changeTextSelection(true);
+						mKeyBeingPressed = true;
+					}
+				}
+				else if (Input.check(Key.S) || Input.check(Key.DOWN)){
+					if (mKeyBeingPressed == false) {
+						mPlayerDialogueBubble.changeTextSelection(false);
+						mKeyBeingPressed = true;
+					}
+				}
+				else mKeyBeingPressed = false;
+				
 			}
 		}
 		
@@ -205,19 +226,54 @@ package  {
 		}
 		
 		public function createDialogueBubbles():void {
-			mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, mLevel.getNPCDialogue("NPC." + mNPCs[mTalkingNPCKey].mID + ".intro"), null);
+			mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, mLevel.getNPCDialogue("NPC." + mNPCs[mTalkingNPCKey].mID + ".line"), null);
 			add(mNPCDialogueBubble);
 			add(mNPCDialogueBubble.mTextObjects[0]);
 			
-			mPlayerDialogueBubble = new TextBubble(TextBubble.PLAYER_DIALOGUE, mPlayer.mCoordinate, "", mLevel.getPlayerDialogue("NPC." + mNPCs[mTalkingNPCKey].mID + ".line"));
+			mPlayerDialogueBubble = new TextBubble(TextBubble.PLAYER_DIALOGUE, mPlayer.mCoordinate, "", mLevel.getPlayerDialogue("NPC." + mNPCs[mTalkingNPCKey].mID + ".response"));
 			mPlayerDialogueBubble.mTextObjects[0].highlightText();
 			add(mPlayerDialogueBubble);
 			for (var i:int = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
 				add(mPlayerDialogueBubble.mTextObjects[i]);
+				
+			mPlayerDialogueBubble.mDialogueKey = 0;
 		}
 		
 		private function handleDialogue():void {
+			if (mPlayerDialogueBubble.mDialogueKey == mPlayerDialogueBubble.mTextObjects.length - 1){
 			exitDialogue();
+			}
+			else{
+				mDialogueLevel += 1;
+				mDialoguePath.push(mPlayerDialogueBubble.mDialogueKey + 1);
+				remove(mNPCDialogueBubble);
+				remove(mNPCDialogueBubble.mTextObjects[0]);
+				remove(mPlayerDialogueBubble);
+				for (var i:int = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
+				remove(mPlayerDialogueBubble.mTextObjects[i]);
+				
+				mNPCDialogueReference = "NPC." + mNPCs[mTalkingNPCKey].mID + ".line";
+				mPlayerDialogueReference = "NPC." + mNPCs[mTalkingNPCKey].mID + ".response";
+				
+				for (i = 0; i < mDialoguePath.length; i++)
+				{
+					mNPCDialogueReference = mNPCDialogueReference + "." + mDialoguePath[i];
+					mPlayerDialogueReference = mPlayerDialogueReference + "." + mDialoguePath[i];
+				}
+				
+				
+				
+										
+				mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, mLevel.getNPCDialogue(mNPCDialogueReference), null);
+				add(mNPCDialogueBubble);
+				add(mNPCDialogueBubble.mTextObjects[0]);
+				
+				mPlayerDialogueBubble = new TextBubble(TextBubble.PLAYER_DIALOGUE, mPlayer.mCoordinate, "", mLevel.getPlayerDialogue(mPlayerDialogueReference));
+				mPlayerDialogueBubble.mTextObjects[0].highlightText();
+				add(mPlayerDialogueBubble);
+				for (i = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
+				add(mPlayerDialogueBubble.mTextObjects[i]);
+			}
 		}
 		
 		private function exitDialogue():void {
@@ -228,6 +284,9 @@ package  {
 			remove(mPlayerDialogueBubble);
 			for (var i:int = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
 				remove(mPlayerDialogueBubble.mTextObjects[i]);
+				
+			mDialoguePath.length = 0;
+			mDialogueLevel = 0;
 		}
 	}
 }
