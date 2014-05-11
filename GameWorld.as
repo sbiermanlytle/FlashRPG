@@ -28,7 +28,6 @@ package  {
 		private var mNPCDialogueBubble:TextBubble;
 		private var mPlayerDialogueBubble:TextBubble;
 		private var mTalkingNPCKey:int;
-		private var mDialogueLevel:int;
 		private var mDialoguePath:Array = new Array();
 		private var mPlayerDialogueReference:String;
 		private var mNPCDialogueReference:String;
@@ -244,7 +243,6 @@ package  {
 			exitDialogue();
 			}
 			else{
-				mDialogueLevel += 1;
 				mDialoguePath.push(mPlayerDialogueBubble.mDialogueKey + 1);
 				remove(mNPCDialogueBubble);
 				remove(mNPCDialogueBubble.mTextObjects[0]);
@@ -286,7 +284,7 @@ package  {
 				remove(mPlayerDialogueBubble.mTextObjects[i]);
 				
 			mDialoguePath.length = 0;
-			mDialogueLevel = 0;
+			
 		}
 	}
 }
