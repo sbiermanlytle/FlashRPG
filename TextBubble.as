@@ -16,6 +16,7 @@ package  {
 		public static var NPC_DIALOGUE:int = 2;
 		public static var PLAYER_DIALOGUE:int = 3;
 		
+		public var mDialogueKey:int;
 		public var mTextObjects:Array;
 		
 		public function TextBubble(bubbleType:int, coor:Point, text:String, strings:Array) {
@@ -55,16 +56,18 @@ package  {
 			var i:int = 0;
 			while (keepLooking){
 				if (mTextObjects[i].isHighlighted)
-					keepLooking = false;
+					keepLooking = false;					
 				if (keepLooking) i++;
 			}
 			if (up && i > 0) {
 				mTextObjects[i].unHighlightText();
 				mTextObjects[i - 1].highlightText();
+				mDialogueKey = i - 1;
 			}
 			else if (!up && i < mTextObjects.length - 1) {
 				mTextObjects[i].unHighlightText();
 				mTextObjects[i + 1].highlightText();
+				mDialogueKey = i + 1;
 			}
 		}
 	}

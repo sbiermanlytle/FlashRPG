@@ -5,12 +5,56 @@
 	<element ref="NPC.0.goodbye4" value="I'll catch you later." />
 	<element ref="NPC.0.goodbye5" value="Hey sorry, but I got to go right now." />
 	
-	<element ref="NPC.1.intro" value="Hello!" />
-		<element ref="NPC.1.line1" value="What are you doing?" />
-			<element ref="NPC.1.response1" value="Just walking around in circles, doing nothing really!" />
-				<element ref="NPC.1.line1.1" value="That sounds fun." />
-					<element ref="NPC.1.response1.1" value="It really is!" />
-				<element ref="NPC.1.line1.2" value="That's kinda weird." />
+	<element ref="NPC.1.line.1" value="Hello!" />
+	<element ref="NPC.1.response.1" value="What are you doing?" />
+		<element ref="NPC.1.line.1.1" value="Just walking around in circles, doing nothing really!" />
+		<element ref="NPC.1.response.1.1" value="That sounds fun." />
+			<element ref="NPC.1.line.1.1.1" value="It really is!" />
+		<element ref="NPC.1.response.1.2" value="That's kinda weird." />
+			<element ref="NPC.1.line.1.2.1" value="Don't judge me." />
+			<element ref="NPC.1.response.1.2.1" value="I'm judging you hardcore" />
+				<element ref="NPC.1.line.1.2.1.1" value="Leave me!" />
+		
+	<element ref="NPC.2.line.1" value="No, No, where did I put that textbook?" />
+	<element ref="NPC.2.response.1" value="What book are you looking for?" />
+		<element ref="NPC.2.line.1.1" value="I'm looking for my medical dictionary. Oh, where is it?" />
+		<element ref="NPC.2.response.1.1" value="I think I saw it on the bookshelf" />
+			<element ref="NPC.2.line.1.1.1" value="Ah, I take another look over there. Thanks!" />
+	<element ref="NPC.2.response.2" value="What do you do in the lab?" />
+		<element ref="NPC.2.line.2.1" value="I specialize in preventative medicine, and I am currently working on a vaccine for the common cold." />
+		<element ref="NPC.2.response.2.1" value="Wow, that sounds awesome!" />
+			<element ref="NPC.2.line.2.1.1" value="One day mankind will live without fear of getting a cold. But until then, I must find that textbook" />
+			
+					
+	<element ref="NPC.3.line.1" value="This homework is really boring." />
+	<element ref="NPC.3.response.1" value="Why don't you take a break?" />
+		<element ref="NPC.3.line.1.1" value="I have to finish this assignment by tonight, or else I won't get to watch TV." />
+		<element ref="NPC.3.response.1.1" value="Good luck. I hear there's a new episode of 'Superboy' tonight." />
+			<element ref="NPC.3.line.1.1.1" value="Oh man, I had better finish quickly then! I'll see you tomorrow." />
+		
+	<element ref="NPC.4.line.1" value="Wow, it's really nice outside today!" />
+	<element ref="NPC.4.response.1" value="Yeah, the flowers are really pretty too." />
+		<element ref="NPC.4.line.1.1" value="Ah, I really love Spring." />
+		
+	<element ref="NPC.5.line.1" value="Welcome to the Pallet Town Lab. How may I help you?"/>
+	<element ref="NPC.5.response.1" value="What is this place?" />
+		<element ref="NPC.5.line.1.1" value="This is one of the world's greatest research facilities" />
+		<element ref="NPC.5.response.1.1" value="How come I've never heard of it?" />
+			<element ref="NPC.5.line.1.1.1" value="You're too young to know, but one day you will understand." />
+		<element ref="NPC.5.response.1.2" value="Cool. What are you guys working on?"/>
+			<element ref="NPC.5.line.1.2.1" value="We're building a robot that helps people learn English." />
+	<element ref="NPC.5.response.2" value="What do you do here?" />
+		<element ref="NPC.5.line.2.1" value="I am the head scientist here, and I oversee the laboratory." />
+		<element ref="NPC.5.response.2.1" value="Can you make me a potion to turn me into a dragon?" />
+			<element ref="NPC.5.line.2.1.1" value="Ah sorry, we just ran out of dragon juice. Maybe next time" />
+		<element ref="NPC.5.response.2.2" value="Someday, I wanna be a scientist too!" />
+			<element ref="NPC.5.line.2.2.1" value="That's great to hear! Study hard, clean your room, and east all your vegetables." />
+	<element ref="NPC.5.response.3" value="Your glasses look funny." />
+		<element ref="NPC.5.line.3.1" value="I'm really busy, don't you have someone else to bother?" />
+		
+	<element ref="NPC.6.line.1" value="Hello there. How are you doing today?" />
+	<element ref="NPC.6.response.1" value="I'm great! How about you?" />
+		<element ref="NPC.6.line.1.1" value="Just waiting for my son to finish his homework." />
 	
 	<element ref="sign.1" value="Your House" x="15" y="12" />
 	<element ref="sign.2" value="Some other persons house" x="20" y="12" />
