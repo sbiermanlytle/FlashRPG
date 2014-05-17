@@ -32,6 +32,7 @@ package  {
 		private var mPlayerDialogueReference:String;
 		private var mNPCDialogueReference:String;
 		private var mKeyBeingPressed:Boolean = false;
+		private var lineLength:int = 45;
 		
 		
 		
@@ -225,7 +226,7 @@ package  {
 		}
 		
 		public function createDialogueBubbles():void {
-			mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, mLevel.getNPCDialogue("NPC." + mNPCs[mTalkingNPCKey].mID + ".line"), null);
+			mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.getNPCDialogue("NPC." + mNPCs[mTalkingNPCKey].mID + ".line")), null);
 			add(mNPCDialogueBubble);
 			add(mNPCDialogueBubble.mTextObjects[0]);
 			
@@ -262,7 +263,7 @@ package  {
 				
 				
 										
-				mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, mLevel.getNPCDialogue(mNPCDialogueReference), null);
+				mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.getNPCDialogue(mNPCDialogueReference)), null);
 				add(mNPCDialogueBubble);
 				add(mNPCDialogueBubble.mTextObjects[0]);
 				
@@ -285,6 +286,38 @@ package  {
 				
 			mDialoguePath.length = 0;
 			
+		}
+		
+		private function sliceDialogue(dialogue:String):String {
+			var stringLeft:String = dialogue;
+			var output:String;
+			var lineArray:Array = new Array();
+			var breakPoint:int;
+			
+			
+			while (stringLeft.length > lineLength) {
+				output = stringLeft.slice(lineLength, stringLeft.length);
+				breakPoint = output.search(" ") + lineLength + 1;
+				if (breakPoint == lineLength)
+					breakPoint = lineLength;
+				output = stringLeft.slice(0, breakPoint);
+				lineArray.push(output);
+				
+				stringLeft = stringLeft.slice(breakPoint, stringLeft.length);
+			}
+			
+			output = "";
+			
+			if (dialogue.length <= lineLength) {
+				output = dialogue;
+			} else {
+				for (var i:int = 0; i < lineArray.length; i++) {
+					output += lineArray[i] + "\n";
+				}
+				output += stringLeft;
+			}
+			
+			return output;
 		}
 	}
 }
