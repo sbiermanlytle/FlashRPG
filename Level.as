@@ -127,5 +127,59 @@ package  {
 				}
 			return strings;
 		}
+		
+		public function getPlayerResponseType(root:String):String {
+			var dataElement:XML;
+			var dataList:XMLList = mStrings.element;
+			var type:String = "Not Found";
+			for each (dataElement in dataList)
+				if (String(dataElement.@ref).slice(0, String(dataElement.@ref).length - 2) == root && dataElement.hasOwnProperty("@type"))
+					type = String(dataElement.@type);		
+			return type;
+		}
+		
+		public function getPlayerWordBank(root:String):Array {
+			var dataElement:XML;
+			var dataList:XMLList = mStrings.wordbank;
+			var data:String;
+			var lastbreak:int = 0;
+			var wordbank:Array = new Array();
+			for each (dataElement in dataList)
+				if (String(dataElement.@ref).slice(0, String(dataElement.@ref).length - 2) == root)
+					data = String(dataElement.@value);					
+			for (var i:int = 0; i < data.length; i++) {
+				if (data.charAt(i) == "/" && data.charAt(i - 1) == "*") {
+					wordbank.push(data.substring(lastbreak, i - 1));
+					lastbreak = i + 1;
+				}
+				if (i == data.length - 1) {
+					wordbank.push(data.substring(lastbreak, data.length));
+				}
+			}
+			return wordbank;
+		}
+		
+		public function getPlayerPrompt(root:String):String {
+			var dataElement:XML;
+			var dataList:XMLList = mStrings.element;
+			var prompt:String;
+			for each (dataElement in dataList)
+				if (String(dataElement.@ref).slice(0, String(dataElement.@ref).length - 2) == root)
+					prompt = String(dataElement.@value);		
+			return prompt;
+		}
+		
+		public function verifyInput(root:String, input:String):Array {
+			var dataElement:XML;
+			var dataList:XMLList = mStrings.element;
+			var output:Array = new Array();
+			for each (dataElement in dataList)
+				if (String(dataElement.@ref).slice(0, String(dataElement.@ref).length - 2) == root && String(dataElement.@type == "Result")){
+					output.push(input == String(dataElement.@answer));
+					if (input == String(dataElement.@answer)) { output.push(String(dataElement.@right)); }
+					else { output.push(String(dataElement.@wrong)); }
+				}
+			return output;
+		}
 	}
 }
