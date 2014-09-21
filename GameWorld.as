@@ -82,8 +82,10 @@ package  {
 			else if (mPlayer.isTalking) {
 				if (Input.check(Key.ENTER)){
 					if (mKeyBeingPressed == false) {
-						if (mPlayer.isInputting) { 
+						if (mPlayer.isInputting) {
+							remove(mPlayerDialogueBubble.mPrompt);
 							mPlayerDialogueBubble.handleInput(false); 
+							add(mPlayerDialogueBubble.mPrompt);							
 							if (mPlayerDialogueBubble.mSubmit == true) {
 								mPlayer.isInputting = false;
 								handleDialogue();

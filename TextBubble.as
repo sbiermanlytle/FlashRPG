@@ -113,18 +113,22 @@ package  {
 		}
 		
 		public function changeInputSelection(direction:String):void {
+			trace(mRow, mCol);
 			if (direction == "up" && mRow > 1) {
 				if (mRow == 2) {
 					mPrompt.highlightText();
-					
+					mTextObjects[(mRow - 2) * 5 + (mCol - 1)].unHighlightText();
 				}else {	
-					mTextObjects[(mRow - 3) * 5 + (mCol - 1)].highlightText();
+					mTextObjects[(mRow - 2) * 5 + (mCol - 1)].unHighlightText();
+					if (mRow == Math.floor(mTextObjects.length / 5) + 2 && mCol == mTextObjects.length % 5) {
+						mCol = 5;
 					}
-				mTextObjects[(mRow - 2) * 5 + (mCol - 1)].unHighlightText();
+					mTextObjects[(mRow - 3) * 5 + (mCol - 1)].highlightText();
+				}				
 				mRow -= 1;
 			}
 			
-			if (direction == "down" && mRow < (mTextObjects.length/5 + 1)) {
+			if (direction == "down" && mRow < (mTextObjects.length/5 + 1) && mCol <= mTextObjects.length % 5) {
 				if (mRow == 1) {
 					mRow += 1;
 					mPrompt.unHighlightText();
@@ -134,6 +138,12 @@ package  {
 					mRow += 1;
 					mTextObjects[(mRow - 2) * 5 + (mCol - 1)].highlightText();											
 				}
+			}else if (direction == "down" && ((mRow * 5) + (mCol - 1)) > mTextObjects.length) {
+				trace("flag");
+				mTextObjects[(mRow - 2) * 5 + (mCol - 1)].unHighlightText();
+				mRow = Math.floor(mTextObjects.length / 5) + 2;
+				mCol = mTextObjects.length % 5;
+				mTextObjects[(mRow - 2) * 5 + (mCol - 1)].highlightText();											
 			}
 			
 			if (direction == "left") {
@@ -167,6 +177,7 @@ package  {
 		
 		public function handleInput(deleteInput:Boolean):void {
 			var newInput:String;
+			var wasHighlighted:Boolean;
 			if (deleteInput) {
 				if (mRow == 1) {
 					mPrompt.mText.text = mPrompt.mText.text.slice(0, mBlanks[mBlank - 1] + 1) + mPrompt.mText.text.slice(mBlanks[mBlank - 1] + mInputs[mBlank - 1].length + 1, mPrompt.mText.text.length);
@@ -200,6 +211,10 @@ package  {
 					}					
 				}
 			}
+			wasHighlighted = mPrompt.isHighlighted;
+			mPrompt = new TextObject(mPrompt.mText.text, x + 30, y + 20);	
+			if (wasHighlighted) { mPrompt.highlightText()};
+			
 		}
 		
 	}
