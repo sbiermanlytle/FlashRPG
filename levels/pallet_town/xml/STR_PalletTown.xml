@@ -14,7 +14,12 @@
 			<element ref="NPC.1.line.1.2.1" value="Don't judge me." />
 			<element ref="NPC.1.response.1.2.1" value="I'm judging you hardcore" />
 				<element ref="NPC.1.line.1.2.1.1" value="Leave me!" />
-		
+			<element ref="NPC.1.response.1.2.2" value="Wait one second..." />
+				<element ref="NPC.1.line.1.2.2.1" value="Leave me!" />
+				<element ref="NPC.1.response.1.2.2.1" value="I _____ _____ what you are _____." type="UserInput" />
+				<wordbank ref="NPC.1.response.1.2.2.1" value="don't*/like*/doing*/random*/words*/enigma*/pretense" />
+					<element ref="NPC.1.line.1.2.2.1.1" type="Result" answer="I don't like what you are doing." right="That is correct." wrong="I don't understand."
+/>		
 	<element ref="NPC.2.line.1" value="No, No, where did I put that textbook?" />
 	<element ref="NPC.2.response.1" value="What book are you looking for?" />
 		<element ref="NPC.2.line.1.1" value="I'm looking for my medical dictionary. Oh, where is it?" />

@@ -6,10 +6,11 @@ package {
 	/**
 	 * @author Sebastian Bierman-Lytle
 	*/
-	public class Player extends Character{
+	public class Player extends Character {
 		
 		[Embed(source = 'images/maleherosheet.png')] private const PlayerImages:Class;
 		public var sprMaleHero:Spritemap = new Spritemap(PlayerImages, 50, 68);
+		public var isInputting:Boolean = false;
 		
 		public function Player(world:GameWorld, id:int, location:int, coordinate:Point, direction:int) {
 			super(world, id, location, coordinate, direction);

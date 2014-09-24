@@ -80,24 +80,56 @@ package  {
 					handleActionKey();
 			}
 			else if (mPlayer.isTalking) {
-				if (Input.check(Key.ENTER) || Input.check(Key.D)){
+				if (Input.check(Key.ENTER)){
 					if (mKeyBeingPressed == false) {
-						handleDialogue();
+						if (mPlayer.isInputting) {
+							remove(mPlayerDialogueBubble.mPrompt);
+							mPlayerDialogueBubble.handleInput(false); 
+							add(mPlayerDialogueBubble.mPrompt);							
+							if (mPlayerDialogueBubble.mSubmit == true) {
+								mPlayer.isInputting = false;
+								handleDialogue();
+							}							
+						}
+						else { handleDialogue(); }
 						mKeyBeingPressed = true;
 					}
 				}
 				else if (Input.check(Key.W) || Input.check(Key.UP)){
-					if (mKeyBeingPressed == false){
-						mPlayerDialogueBubble.changeTextSelection(true);
+					if (mKeyBeingPressed == false) {
+						if (mPlayer.isInputting) { mPlayerDialogueBubble.changeInputSelection("up") }
+						else{mPlayerDialogueBubble.changeTextSelection(true);}
 						mKeyBeingPressed = true;
 					}
 				}
 				else if (Input.check(Key.S) || Input.check(Key.DOWN)){
 					if (mKeyBeingPressed == false) {
-						mPlayerDialogueBubble.changeTextSelection(false);
+						if (mPlayer.isInputting) { mPlayerDialogueBubble.changeInputSelection("down"); }
+						else { mPlayerDialogueBubble.changeTextSelection(false); }
 						mKeyBeingPressed = true;
 					}
 				}
+				else if ((Input.check(Key.D) || Input.check(Key.RIGHT)) && mPlayer.isInputting)
+					{
+						if(mKeyBeingPressed == false){
+							mPlayerDialogueBubble.changeInputSelection("right");
+							mKeyBeingPressed = true;
+						}
+					}
+				else if ((Input.check(Key.A) || Input.check(Key.LEFT)) && mPlayer.isInputting)
+					{
+						if(mKeyBeingPressed == false){
+							mPlayerDialogueBubble.changeInputSelection("left");
+							mKeyBeingPressed = true;
+						}
+					}
+				else if ((Input.check(Key.P)) && mPlayer.isInputting)
+					{
+						if(mKeyBeingPressed == false){
+							mPlayerDialogueBubble.handleInput(true);
+							mKeyBeingPressed = true;
+						}
+					}
 				else mKeyBeingPressed = false;
 				
 			}
@@ -258,20 +290,46 @@ package  {
 				{
 					mNPCDialogueReference = mNPCDialogueReference + "." + mDialoguePath[i];
 					mPlayerDialogueReference = mPlayerDialogueReference + "." + mDialoguePath[i];
-				}
+				}				
 				
 				
 				
-										
-				mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.getNPCDialogue(mNPCDialogueReference)), null);
-				add(mNPCDialogueBubble);
-				add(mNPCDialogueBubble.mTextObjects[0]);
-				
-				mPlayerDialogueBubble = new TextBubble(TextBubble.PLAYER_DIALOGUE, mPlayer.mCoordinate, "", mLevel.getPlayerDialogue(mPlayerDialogueReference));
-				mPlayerDialogueBubble.mTextObjects[0].highlightText();
-				add(mPlayerDialogueBubble);
-				for (i = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
-				add(mPlayerDialogueBubble.mTextObjects[i]);
+				if (mLevel.getPlayerResponseType(mPlayerDialogueReference) == "UserInput") {
+					mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.getNPCDialogue(mNPCDialogueReference)), null);
+					add(mNPCDialogueBubble);
+					add(mNPCDialogueBubble.mTextObjects[0]);
+					
+					mPlayerDialogueBubble = new TextBubble(TextBubble.USER_INPUT, mPlayer.mCoordinate, mLevel.getPlayerPrompt(mPlayerDialogueReference), mLevel.getPlayerWordBank(mPlayerDialogueReference));
+					mPlayerDialogueBubble.mTextObjects[0].highlightText();
+					add(mPlayerDialogueBubble);
+					add(mPlayerDialogueBubble.mPrompt);
+					for (i = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
+					add(mPlayerDialogueBubble.mTextObjects[i]);
+					mPlayer.isInputting = true;
+					mPlayerDialogueBubble.mDialogueKey = 0;
+				}else if (mLevel.getPlayerResponseType(mNPCDialogueReference) == "Result") {
+					var Result:Array = mLevel.verifyInput(mNPCDialogueReference, mPlayerDialogueBubble.mPrompt.mText.text);
+					mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.verifyInput(mNPCDialogueReference, mPlayerDialogueBubble.mPrompt.mText.text)[1]), null);
+					add(mNPCDialogueBubble);
+					add(mNPCDialogueBubble.mTextObjects[0]);
+					
+					remove(mPlayerDialogueBubble.mPrompt);
+					mPlayerDialogueBubble = new TextBubble(TextBubble.PLAYER_DIALOGUE, mPlayer.mCoordinate, "", mLevel.getPlayerDialogue(mPlayerDialogueReference));
+					mPlayerDialogueBubble.mTextObjects[0].highlightText();
+					add(mPlayerDialogueBubble);
+					for (i = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
+					add(mPlayerDialogueBubble.mTextObjects[i]);
+				}else {
+					mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.getNPCDialogue(mNPCDialogueReference)), null);
+					add(mNPCDialogueBubble);
+					add(mNPCDialogueBubble.mTextObjects[0]);
+					
+					mPlayerDialogueBubble = new TextBubble(TextBubble.PLAYER_DIALOGUE, mPlayer.mCoordinate, "", mLevel.getPlayerDialogue(mPlayerDialogueReference));
+					mPlayerDialogueBubble.mTextObjects[0].highlightText();
+					add(mPlayerDialogueBubble);
+					for (i = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
+					add(mPlayerDialogueBubble.mTextObjects[i]);
+				}				
 			}
 		}
 		
