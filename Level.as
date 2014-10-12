@@ -138,6 +138,16 @@ package  {
 			return type;
 		}
 		
+		public function getAudioFilename(root:String):String {
+			var dataElement:XML;
+			var dataList:XMLList = mStrings.element;
+			var filename:String = "Not Found";
+			for each (dataElement in dataList)
+				if (String(dataElement.@ref).slice(0, String(dataElement.@ref).length - 2) == root && dataElement.hasOwnProperty("@file"))
+					filename = String(dataElement.@file);		
+			return filename;
+		}
+		
 		public function getPlayerWordBank(root:String):Array {
 			var dataElement:XML;
 			var dataList:XMLList = mStrings.wordbank;
