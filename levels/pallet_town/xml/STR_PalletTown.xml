@@ -5,7 +5,7 @@
 	<element ref="NPC.0.goodbye4" value="I'll catch you later." />
 	<element ref="NPC.0.goodbye5" value="Hey sorry, but I got to go right now." />
 	
-	<element ref="NPC.1.line.1" value="Hello!" />
+	<element ref="NPC.1.line.1" value="Hi son, could you please do me a favor?" />
 	<element ref="NPC.1.response.1" value="What are you doing?" />
 		<element ref="NPC.1.line.1.1" value="Just walking around in circles, doing nothing really!" />
 		<element ref="NPC.1.response.1.1" value="That sounds fun." />
