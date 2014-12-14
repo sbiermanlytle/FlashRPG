@@ -25,8 +25,8 @@
 		<element ref="NPC.2.line.1.1" value="I'm looking for my medical dictionary. Oh, where is it?" />
 		<element ref="NPC.2.response.1.1" value="I think I saw it on the bookshelf" />
 			<element ref="NPC.2.line.1.1.1" value="Ah, I take another look over there. Thanks!" />
-	<element ref="NPC.2.response.2" value="What do you do in the lab?" />
-		<element ref="NPC.2.line.2.1" value="I specialize in preventative medicine, and I am currently working on a vaccine for the common cold." />
+	<element ref="NPC.2.response.2" value="What do you do here?"/>
+		<element ref="NPC.2.line.2.1" value="[Audio]"  type="Audio" file="../src/audio/its_over_9000.mp3" />
 		<element ref="NPC.2.response.2.1" value="Wow, that sounds awesome!" />
 			<element ref="NPC.2.line.2.1.1" value="One day mankind will live without fear of getting a cold. But until then, I must find that textbook" />
 			

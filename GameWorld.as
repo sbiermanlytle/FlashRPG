@@ -1,4 +1,6 @@
 package  {
+	import flash.media.Sound;
+	import flash.net.URLRequest;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Text;
 	import net.flashpunk.World;
@@ -32,7 +34,9 @@ package  {
 		private var mPlayerDialogueReference:String;
 		private var mNPCDialogueReference:String;
 		private var mKeyBeingPressed:Boolean = false;
+		private var mNPCAudio:Sound;
 		private var lineLength:int = 45;
+		
 		
 		
 		
@@ -292,7 +296,10 @@ package  {
 					mPlayerDialogueReference = mPlayerDialogueReference + "." + mDialoguePath[i];
 				}				
 				
-				
+				if (mLevel.getPlayerResponseType(mNPCDialogueReference) == "Audio") {
+					mNPCAudio = new Sound(new URLRequest(mLevel.getAudioFilename(mNPCDialogueReference)));
+					mNPCAudio.play();
+				}
 				
 				if (mLevel.getPlayerResponseType(mPlayerDialogueReference) == "UserInput") {
 					mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.getNPCDialogue(mNPCDialogueReference)), null);
