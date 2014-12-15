@@ -45,7 +45,8 @@ package  {
 		private var lineLength:int = 45;
 		
 		//soundtrack
-		private var soundtracks:Array;
+		private var soundtracks:Array; 
+		private var soundtrackStarted:Boolean = false;
 		
 		// game logic
 		private var mother_dialogue_phase:int = 0;
@@ -68,7 +69,6 @@ package  {
 			soundtracks.push("../src/soundtrack/ss3.mp3");
 			soundtracks.push("../src/soundtrack/ss4.mp3");
 			soundtracks.push("../src/soundtrack/ss5.mp3");
-			playSoundtrack(null);
 		}
 		
 		private function playSoundtrack(event:Event):void {
@@ -184,6 +184,10 @@ package  {
 		}
 		
 		private function movePlayer(direction:int):void {
+			if (!soundtrackStarted) {
+				playSoundtrack(null);
+				soundtrackStarted = true;
+			}
 			if (mInfoBubble != null) {
 				remove(mInfoBubble);
 				remove(mInfoBubble.mTextObjects[0]);
