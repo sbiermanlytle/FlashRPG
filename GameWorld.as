@@ -1,5 +1,8 @@
 package  {
+	import flash.events.Event;
 	import flash.media.Sound;
+	import flash.media.SoundChannel;
+	import flash.media.SoundTransform;
 	import flash.net.URLRequest;
 	import net.flashpunk.Entity;
 	import net.flashpunk.graphics.Text;
@@ -34,11 +37,20 @@ package  {
 		private var mPlayerDialogueReference:String;
 		private var mNPCDialogueReference:String;
 		private var mKeyBeingPressed:Boolean = false;
+		private var mSoundPlaying:Boolean = false;
 		private var mNPCAudio:Sound;
+		private var soundtrackAudio:Sound;
+		private var soundtrackChannel:SoundChannel;
+		private var soundtrackTransform:SoundTransform;
 		private var lineLength:int = 45;
 		
+		//soundtrack
+		private var soundtracks:Array;
 		
-		
+		// game logic
+		private var mother_dialogue_phase:int = 0;
+		private var accepted_quest:Boolean = false;
+		private var book_acquired:int = 0;
 		
 		public function GameWorld() {
 			mMapAnimations = new Array();
@@ -48,6 +60,21 @@ package  {
 			mPlayer = new Player(this, 0, mLevel.mLocation, new Point(5, 3), GameWorld.DOWN);
 			add(mPlayer);
 			mLevel.occupyCoordinate(mPlayer.mCoordinate, mPlayer.mID);
+			
+			soundtracks = new Array();
+			soundtrackTransform = new SoundTransform(0.4, 0);
+			soundtracks.push("../src/soundtrack/ss1.mp3");
+			soundtracks.push("../src/soundtrack/ss2.mp3");
+			soundtracks.push("../src/soundtrack/ss3.mp3");
+			soundtracks.push("../src/soundtrack/ss4.mp3");
+			soundtracks.push("../src/soundtrack/ss5.mp3");
+			playSoundtrack(null);
+		}
+		
+		private function playSoundtrack(event:Event):void {
+			soundtrackAudio = new Sound(new URLRequest(soundtracks[Math.floor(Math.random() * soundtracks.length)]));
+			soundtrackChannel = soundtrackAudio.play(0,0,soundtrackTransform);
+			soundtrackChannel.addEventListener(Event.SOUND_COMPLETE, playSoundtrack);
 		}
 		
 		override public function update():void {
@@ -79,11 +106,11 @@ package  {
 					movePlayer(GameWorld.UP);
 				else if (Input.check(Key.DOWN) || Input.check(Key.S))
 					movePlayer(GameWorld.DOWN);
-				//Check Action key (E)
-				else if (Input.check(Key.E))
+				//Check Action key
+				else if (Input.check(Key.E) || Input.check(Key.SPACE) && !mSoundPlaying)
 					handleActionKey();
 			}
-			else if (mPlayer.isTalking) {
+			else if (mPlayer.isTalking && !mSoundPlaying) {
 				if (Input.check(Key.ENTER)){
 					if (mKeyBeingPressed == false) {
 						if (mPlayer.isInputting) {
@@ -92,10 +119,27 @@ package  {
 							add(mPlayerDialogueBubble.mPrompt);							
 							if (mPlayerDialogueBubble.mSubmit == true) {
 								mPlayer.isInputting = false;
-								handleDialogue();
+								handleDialogue(false);
 							}							
 						}
-						else { handleDialogue(); }
+						else {
+							if( mLevel.getPlayerResponseType(mPlayerDialogueReference) == "Audio") {
+								var ref:String = mPlayerDialogueReference;
+								
+								for (var ii:int = 0; ii < mPlayerDialogueBubble.mTextObjects.length; ii++)
+									if (mPlayerDialogueBubble.mTextObjects[ii].isHighlighted){
+										ref += "." + (ii + 1) + ".mp3";
+										break;
+									}
+								ref = "../src/audio/" + ref;
+								mSoundPlaying = true;
+								var soundChannel:SoundChannel;
+								mNPCAudio = new Sound(new URLRequest(ref));
+								soundChannel = mNPCAudio.play();
+								soundChannel.addEventListener(Event.SOUND_COMPLETE, playerSoundPlaybackEnded);
+							} else 
+								handleDialogue(false);
+						}
 						mKeyBeingPressed = true;
 					}
 				}
@@ -166,6 +210,7 @@ package  {
 					if (mNPCs[i].mID == gridData) { mNPCs[i].initializeConversation(mPlayer.mDirection); mTalkingNPCKey = i; }
 				mPlayer.isTalking = true;
 				createDialogueBubbles();
+				handleDialogue(true);
 			}
 		}
 		
@@ -262,6 +307,7 @@ package  {
 		}
 		
 		public function createDialogueBubbles():void {
+			
 			mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.getNPCDialogue("NPC." + mNPCs[mTalkingNPCKey].mID + ".line")), null);
 			add(mNPCDialogueBubble);
 			add(mNPCDialogueBubble.mTextObjects[0]);
@@ -275,20 +321,39 @@ package  {
 			mPlayerDialogueBubble.mDialogueKey = 0;
 		}
 		
-		private function handleDialogue():void {
-			if (mPlayerDialogueBubble.mDialogueKey == mPlayerDialogueBubble.mTextObjects.length - 1){
+		private function soundPlaybackEnded(event:Event):void {
+			mSoundPlaying = false;
+		}
+		private function playerSoundPlaybackEnded(event:Event):void {
+			mSoundPlaying = false;
+			handleDialogue(false);
+		}
+		
+		private function handleDialogue(firstRun:Boolean):void {
+			if (mPlayerDialogueBubble.mTextObjects.length == 0){
 			exitDialogue();
 			}
 			else{
-				mDialoguePath.push(mPlayerDialogueBubble.mDialogueKey + 1);
+				if (!firstRun)
+					mDialoguePath.push(mPlayerDialogueBubble.mDialogueKey + 1);
 				remove(mNPCDialogueBubble);
 				remove(mNPCDialogueBubble.mTextObjects[0]);
 				remove(mPlayerDialogueBubble);
+				if(mPlayerDialogueBubble.mPrompt!=null)
+						remove(mPlayerDialogueBubble.mPrompt);
 				for (var i:int = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
 				remove(mPlayerDialogueBubble.mTextObjects[i]);
 				
-				mNPCDialogueReference = "NPC." + mNPCs[mTalkingNPCKey].mID + ".line";
-				mPlayerDialogueReference = "NPC." + mNPCs[mTalkingNPCKey].mID + ".response";
+				if (mother_dialogue_phase == 1){
+					mNPCDialogueReference = "NPC." + mNPCs[mTalkingNPCKey].mID + ".line1";
+					mPlayerDialogueReference = "NPC." + mNPCs[mTalkingNPCKey].mID + ".response1";
+				} else if(mLevel.mLocation == Level_PalletTown.HOUSE_LEFT_DOWNSTAIRS && mother_dialogue_phase == 2){
+					mNPCDialogueReference = "NPC." + mNPCs[mTalkingNPCKey].mID + ".line2";
+					mPlayerDialogueReference = "NPC." + mNPCs[mTalkingNPCKey].mID + ".response2";
+				} else {
+					mNPCDialogueReference = "NPC." + mNPCs[mTalkingNPCKey].mID + ".line";
+					mPlayerDialogueReference = "NPC." + mNPCs[mTalkingNPCKey].mID + ".response";
+				}
 				
 				for (i = 0; i < mDialoguePath.length; i++)
 				{
@@ -297,8 +362,11 @@ package  {
 				}				
 				
 				if (mLevel.getPlayerResponseType(mNPCDialogueReference) == "Audio") {
+					mSoundPlaying = true;
+					var soundChannel:SoundChannel;
 					mNPCAudio = new Sound(new URLRequest(mLevel.getAudioFilename(mNPCDialogueReference)));
-					mNPCAudio.play();
+					soundChannel = mNPCAudio.play();
+					soundChannel.addEventListener(Event.SOUND_COMPLETE, soundPlaybackEnded);
 				}
 				
 				if (mLevel.getPlayerResponseType(mPlayerDialogueReference) == "UserInput") {
@@ -311,27 +379,39 @@ package  {
 					add(mPlayerDialogueBubble);
 					add(mPlayerDialogueBubble.mPrompt);
 					for (i = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
-					add(mPlayerDialogueBubble.mTextObjects[i]);
+						add(mPlayerDialogueBubble.mTextObjects[i]);
 					mPlayer.isInputting = true;
 					mPlayerDialogueBubble.mDialogueKey = 0;
+
 				}else if (mLevel.getPlayerResponseType(mNPCDialogueReference) == "Result") {
-					var Result:Array = mLevel.verifyInput(mNPCDialogueReference, mPlayerDialogueBubble.mPrompt.mText.text);
-					mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.verifyInput(mNPCDialogueReference, mPlayerDialogueBubble.mPrompt.mText.text)[1]), null);
-					add(mNPCDialogueBubble);
-					add(mNPCDialogueBubble.mTextObjects[0]);
+					//var Result:Array = mLevel.verifyInput(mNPCDialogueReference, mPlayerDialogueBubble.mPrompt.mText.text);
+					//mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.verifyInput(mNPCDialogueReference, mPlayerDialogueBubble.mPrompt.mText.text)[1]), null);
+					//add(mNPCDialogueBubble);
+					//add(mNPCDialogueBubble.mTextObjects[0]);
 					
-					remove(mPlayerDialogueBubble.mPrompt);
-					mPlayerDialogueBubble = new TextBubble(TextBubble.PLAYER_DIALOGUE, mPlayer.mCoordinate, "", mLevel.getPlayerDialogue(mPlayerDialogueReference));
-					mPlayerDialogueBubble.mTextObjects[0].highlightText();
-					add(mPlayerDialogueBubble);
-					for (i = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
-					add(mPlayerDialogueBubble.mTextObjects[i]);
+					//remove(mPlayerDialogueBubble.mPrompt);
+					//mPlayerDialogueBubble = new TextBubble(TextBubble.PLAYER_DIALOGUE, mPlayer.mCoordinate, "", mLevel.getPlayerDialogue(mPlayerDialogueReference));
+					//mPlayerDialogueBubble.mTextObjects[0].highlightText();
+					//add(mPlayerDialogueBubble);
+					//for (i = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
+					//add(mPlayerDialogueBubble.mTextObjects[i]);
 				}else {
+					
+					// game logic
+					if (!firstRun && mLevel.mLocation == Level_PalletTown.HOUSE_LEFT_DOWNSTAIRS && mPlayerDialogueReference!="NPC.1.response.2" )
+						accepted_quest = true;
+					
 					mNPCDialogueBubble = new TextBubble(TextBubble.NPC_DIALOGUE, mPlayer.mCoordinate, sliceDialogue(mLevel.getNPCDialogue(mNPCDialogueReference)), null);
 					add(mNPCDialogueBubble);
 					add(mNPCDialogueBubble.mTextObjects[0]);
 					
 					mPlayerDialogueBubble = new TextBubble(TextBubble.PLAYER_DIALOGUE, mPlayer.mCoordinate, "", mLevel.getPlayerDialogue(mPlayerDialogueReference));
+					if (mPlayerDialogueBubble.mTextObjects.length == 0) {
+						if (mPlayerDialogueReference == "NPC.2.response1.1.1.1.1.1")
+							mother_dialogue_phase = 2;
+						exitDialogue();
+						return;
+					}
 					mPlayerDialogueBubble.mTextObjects[0].highlightText();
 					add(mPlayerDialogueBubble);
 					for (i = 0; i < mPlayerDialogueBubble.mTextObjects.length; i++)
@@ -350,6 +430,10 @@ package  {
 				remove(mPlayerDialogueBubble.mTextObjects[i]);
 				
 			mDialoguePath.length = 0;
+			
+			// game logic
+			if (accepted_quest && mLevel.mLocation==Level_PalletTown.HOUSE_LEFT_DOWNSTAIRS && mother_dialogue_phase == 0)
+				mother_dialogue_phase = 1;
 			
 		}
 		

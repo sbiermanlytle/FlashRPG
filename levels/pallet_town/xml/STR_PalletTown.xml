@@ -5,64 +5,123 @@
 	<element ref="NPC.0.goodbye4" value="I'll catch you later." />
 	<element ref="NPC.0.goodbye5" value="Hey sorry, but I got to go right now." />
 	
-	<element ref="NPC.1.line.1" value="Hi son, could you please do me a favor?" />
-	<element ref="NPC.1.response.1" value="What are you doing?" />
-		<element ref="NPC.1.line.1.1" value="Just walking around in circles, doing nothing really!" />
-		<element ref="NPC.1.response.1.1" value="That sounds fun." />
-			<element ref="NPC.1.line.1.1.1" value="It really is!" />
-		<element ref="NPC.1.response.1.2" value="That's kinda weird." />
-			<element ref="NPC.1.line.1.2.1" value="Don't judge me." />
-			<element ref="NPC.1.response.1.2.1" value="I'm judging you hardcore" />
-				<element ref="NPC.1.line.1.2.1.1" value="Leave me!" />
-			<element ref="NPC.1.response.1.2.2" value="Wait one second..." />
-				<element ref="NPC.1.line.1.2.2.1" value="Leave me!" />
-				<element ref="NPC.1.response.1.2.2.1" value="I _____ _____ what you are _____." type="UserInput" />
-				<wordbank ref="NPC.1.response.1.2.2.1" value="don't*/like*/doing*/random*/words*/enigma*/pretense" />
-					<element ref="NPC.1.line.1.2.2.1.1" type="Result" answer="I don't like what you are doing." right="That is correct." wrong="I don't understand."
-/>		
-	<element ref="NPC.2.line.1" value="No, No, where did I put that textbook?" />
-	<element ref="NPC.2.response.1" value="What book are you looking for?" />
-		<element ref="NPC.2.line.1.1" value="I'm looking for my medical dictionary. Oh, where is it?" />
-		<element ref="NPC.2.response.1.1" value="I think I saw it on the bookshelf" />
-			<element ref="NPC.2.line.1.1.1" value="Ah, I take another look over there. Thanks!" />
-	<element ref="NPC.2.response.2" value="What do you do here?"/>
-		<element ref="NPC.2.line.2.1" value="[Audio]"  type="Audio" file="../src/audio/its_over_9000.mp3" />
-		<element ref="NPC.2.response.2.1" value="Wow, that sounds awesome!" />
-			<element ref="NPC.2.line.2.1.1" value="One day mankind will live without fear of getting a cold. But until then, I must find that textbook" />
-			
+	<element ref="NPC.1.line.1" value="Hi son, could you please do me a favor?"  type="Audio" file="../src/audio/NPC.1.line.1.mp3"  />
+	<element ref="NPC.1.response.1" value="Of course mother, what do you need?" type="Audio" file="../src/audio/NPC.1.response.1.mp3" />
+		<element ref="NPC.1.line.1.1" value="Could you please find the scientist named Dr. Neal, and borrow his book called 'Plants for Cooking'? I am baking a pie for your birthday party, and need help finding a special ingredient!" type="Audio" file="../src/audio/NPC.1.line.1.1.mp3" />
+			<element ref="NPC.1.response.1.1" value="Okay I will find him." type="Audio" file="../src/audio/NPC.1.response.1.1.mp3"/>
+	<element ref="NPC.1.response.2" value="Not now, I have important business to attend to." type="Audio" file="../src/audio/NPC.1.response.2.mp3"/>	
+	
+	<element ref="NPC.1.line1.1" value="Have you found the book?"  type="Audio" file="../src/audio/NPC.1.line1.1.mp3"  />
+	<element ref="NPC.1.response1.1" value="Not yet, I will soon." type="Audio" file="../src/audio/NPC.1.response1.1.mp3" />
+	
+	<element ref="NPC.1.line2.1" value="You got the book! Thank you!"  type="Audio" file="../src/audio/NPC.1.line2.1.mp3"  />
+	<element ref="NPC.1.response2.1" value="It wasn't easy." type="Audio" file="../src/audio/NPC.1.response2.1.mp3" />
+
+	<element ref="NPC.2.line.1" value="Hello there, can I help you?" type="Audio" file="../src/audio/NPC.2.line.1.mp3" />
+	<element ref="NPC.2.response.1" value="Nope, I am just exploring." type="Audio" file="../src/audio/NPC.2.response.1.mp3" />
+		<element ref="NPC.2.line.1.1" value="That sounds fun, just please do not touch anything!" type="Audio" file="../src/audio/NPC.2.line.1.1.mp3" />
+		<element ref="NPC.2.response.1.1" value="Okay, I will try not to." type="Audio" file="../src/audio/NPC.2.response.1.1.mp3" />
+		
+	<element ref="NPC.2.line1.1" value="Hello there, can I help you?" type="Audio" file="../src/audio/NPC.2.line1.1.mp3" />
+	<element ref="NPC.2.response1.1" value="Yes, are you Dr. Neal?" type="Audio" file="../src/audio/NPC.2.response1.1.mp3" />
+		<element ref="NPC.2.line1.1.1" value="Why yes, I am Dr. Neal." type="Audio" file="../src/audio/NPC.2.line1.1.1.mp3" />
+		<element ref="NPC.2.response1.1.1" value="Can I borrow a book called 'Plants for Cooking'?" type="Audio" file="../src/audio/NPC.2.response1.1.1.mp3" />
+			<element ref="NPC.2.line1.1.1.1" value="Ah, you must be Mrs. Jones's son! Nice to meet you. You may borrow the book, but first, you must answer a question." type="Audio" file="../src/audio/NPC.2.line1.1.1.1.mp3" />
+			<element ref="NPC.2.response1.1.1.1" value="Okay." type="Audio" file="../src/audio/NPC.2.response1.1.1.1.mp3" />
+				<element ref="NPC.2.line1.1.1.1.1" value="If today is Wednesday, what day will it be tomorrow?" type="Audio" file="../src/audio/NPC.2.line1.1.1.1.1.mp3" />
+				<element ref="NPC.2.response1.1.1.1.1" value="Tomorrow is _________." type="UserInput" />
+				<wordbank ref="NPC.2.response1.1.1.1.1" value="Thursday*/My Birthday" />
+					<element ref="NPC.2.line1.1.1.1.1.1"  value="Yes that is right! Here is the book." type="Audio" file="../src/audio/NPC.2.line1.1.1.1.1.1.mp3" />
+					<element ref="NPC.2.response1.1.1.1.1.1" value="Thanks!" type="Audio" file="../src/audio/NPC.2.response1.1.1.1.1.1.mp3" />	
 					
-	<element ref="NPC.3.line.1" value="This homework is really boring." />
-	<element ref="NPC.3.response.1" value="Why don't you take a break?" />
-		<element ref="NPC.3.line.1.1" value="I have to finish this assignment by tonight, or else I won't get to watch TV." />
-		<element ref="NPC.3.response.1.1" value="Good luck. I hear there's a new episode of 'Superboy' tonight." />
-			<element ref="NPC.3.line.1.1.1" value="Oh man, I had better finish quickly then! I'll see you tomorrow." />
+	<element ref="NPC.3.line.1" value="Math is sooooooo boring." type="Audio" file="../src/audio/NPC.3.line.1.mp3" />
+	<element ref="NPC.3.response.1" value="Take a break and come outside with me!" type="Audio" file="../src/audio/NPC.3.response.1.mp3" />
+		<element ref="NPC.3.line.1.1" value="I want to, but I have a test tomorrow and I really need to study for it." type="Audio" file="../src/audio/NPC.3.line.1.1.mp3" />
+		<element ref="NPC.3.response.1.1" value="Aw, maybe tomorrow?" type="Audio" file="../src/audio/NPC.3.response.1.1.mp3" />
+			<element ref="NPC.3.line.1.1.1" value="Of course! It's your birthday! Do you still want to go explore the woods?" type="Audio" file="../src/audio/NPC.3.line.1.1.1.mp3" />
+			<element ref="NPC.3.response.1.1.1" value="For sure! I can't wait!" type="Audio" file="../src/audio/NPC.3.response.1.1.1.mp3" />
+				<element ref="NPC.3.line.1.1.1.1" value="I know, me either!... Uh oh, do you know what 9*12 is?" type="Audio" file="../src/audio/NPC.3.line.1.1.1.1.mp3" />
+				<element ref="NPC.3.response.1.1.1.1" value="Yes its 108." type="Audio" file="../src/audio/NPC.3.response.1.1.1.1.mp3" />
+					<element ref="NPC.3.line.1.1.1.1.1" value="Thanks! You are so smart." type="Audio" file="../src/audio/NPC.3.line.1.1.1.1.1.mp3" />
+					<element ref="NPC.3.response.1.1.1.1.1" value="Nah I just took that test yesterday." type="Audio" file="../src/audio/NPC.3.response.1.1.1.1.1.mp3" />
+					<element ref="NPC.3.response.1.1.1.1.2" value="I know, they call me boy genius." type="Audio" file="../src/audio/NPC.3.response.1.1.1.1.2.mp3" />
+				<element ref="NPC.3.response.1.1.1.2" value="Yes its 98." type="Audio" file="../src/audio/NPC.3.response.1.1.1.2.mp3" />
+					<element ref="NPC.3.line.1.1.1.2.1" value="Thanks!... Wait, no its not. Its 108!" type="Audio" file="../src/audio/NPC.3.line.1.1.1.2.1.mp3" />
+					<element ref="NPC.3.response.1.1.1.2.1" value="Oh. I'm pretty bad at math." type="Audio" file="../src/audio/NPC.3.response.1.1.1.2.1.mp3" />
+						<element ref="NPC.3.line.1.1.1.2.1.1" value="That's okay, your really good at everything   else." type="Audio" file="../src/audio/NPC.3.line.1.1.1.2.1.1.mp3" />
+						<element ref="NPC.3.response.1.1.1.2.1.1" value="Aw thanks! Good luck studying." type="Audio" file="../src/audio/NPC.3.response.1.1.1.2.1.1.mp3" />
+			
+	<element ref="NPC.3.line1.1" value="Hey what's up?" type="Audio" file="../src/audio/NPC.3.line1.1.mp3" />
+	<element ref="NPC.3.response1.1" value="Are you Dr. Neal?" type="Audio" file="../src/audio/NPC.3.response1.1.mp3" />
+		<element ref="NPC.3.line1.1.1" value="No silly, I'm your best friend Sophie!" type="Audio" file="../src/audio/NPC.3.line1.1.1.mp3" />
+		<element ref="NPC.3.response1.1.1" value="I was just kidding. How is the studying coming?" type="Audio" file="../src/audio/NPC.3.response1.1.1.mp3" />
+			<element ref="NPC.3.line1.1.1.1" value="Pretty good, I really hope I do well on this test!" type="Audi" file="../src/audio/NPC.3.line1.1.1.1.mp3" />
+			<element ref="NPC.3.response1.1.1.1" value="Oh you know you will." type="Audio" file="../src/audio/NPC.3.response1.1.1.1.mp3" />
+				<element ref="NPC.3.line1.1.1.1.1" value="Thanks! good luck finding Dr. Neal." type="Audio" file="../src/audio/NPC.3.line1.1.1.1.1.mp3" />
+				<element ref="NPC.3.response1.1.1.1.1" value="Thanks, I think I will check the lab." type="Audio" file="../src/audio/NPC.3.response1.1.1.1.1.mp3" />
+			
 		
-	<element ref="NPC.4.line.1" value="Wow, it's really nice outside today!" />
-	<element ref="NPC.4.response.1" value="Yeah, the flowers are really pretty too." />
-		<element ref="NPC.4.line.1.1" value="Ah, I really love Spring." />
+	<element ref="NPC.4.line.1" value="It is really hot outside today!" type="Audi" file="../src/audio/NPC.4.line.1.mp3" />
+	<element ref="NPC.4.response.1" value="Yes, I love the Spring, don't you?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.4.line.1.1" value="It is my favorite season, I just hope it doesn't rain tomorrow." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.4.response.1.1" value="Same here. I want to go explore the woods tomorrow." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.4.line.1.1.1" value="The woods!? But the woods are dangerous, you should not explore there." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.4.response.1.1.1" value="Really? What makes them dangerous?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+				<element ref="NPC.4.line.1.1.1.1" value="Lions and tigers and bears!" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+				<element ref="NPC.4.response.1.1.1.1" value="Oh my..." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.4.response.1.1.2" value="I'm not scared of the woods." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+				<element ref="NPC.4.line.1.1.2.1" value="You should be." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+				<element ref="NPC.4.response.1.1.2.1" value="Why is that?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+					<element ref="NPC.4.line.1.1.2.1.1" value="I heard a story once of a boy who went into the woods. He never came back!" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+					<element ref="NPC.4.response.1.1.2.1.1" value="Maybe I will find him." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+					
+	<element ref="NPC.4.line1.1" value="I love these flowers, don't you?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+	<element ref="NPC.4.response1.1" value="They're alright. Are you Dr. Neal?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.4.line1.1.1" value="No I'm Jason. You should look in the laboratory for Dr. Neal." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.4.response1.1.1" value="Thank you, see you later." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
 		
-	<element ref="NPC.5.line.1" value="Welcome to the Pallet Town Lab. How may I help you?"/>
-	<element ref="NPC.5.response.1" value="What is this place?" />
-		<element ref="NPC.5.line.1.1" value="This is one of the world's greatest research facilities" />
-		<element ref="NPC.5.response.1.1" value="How come I've never heard of it?" />
-			<element ref="NPC.5.line.1.1.1" value="You're too young to know, but one day you will understand." />
-		<element ref="NPC.5.response.1.2" value="Cool. What are you guys working on?"/>
-			<element ref="NPC.5.line.1.2.1" value="We're building a robot that helps people learn English." />
-	<element ref="NPC.5.response.2" value="What do you do here?" />
-		<element ref="NPC.5.line.2.1" value="I am the head scientist here, and I oversee the laboratory." />
-		<element ref="NPC.5.response.2.1" value="Can you make me a potion to turn me into a dragon?" />
-			<element ref="NPC.5.line.2.1.1" value="Ah sorry, we just ran out of dragon juice. Maybe next time." />
-		<element ref="NPC.5.response.2.2" value="Someday, I wanna be a scientist too!" />
-			<element ref="NPC.5.line.2.2.1" value="That's great to hear! Study hard, clean your room, and eat all your vegetables. Don't you understand how important those things are? I'm just typing words to fill up space." />
-	<element ref="NPC.5.response.3" value="Your glasses look funny." />
-		<element ref="NPC.5.line.3.1" value="I'm really busy, don't you have someone else to bother?" />
+	<element ref="NPC.5.line.1" value="Welcome to the Laboratory. Can I help you find something?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+	<element ref="NPC.5.response.1" value="What is this place?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.5.line.1.1" value="This is one of the world's best research labs." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.5.response.1.1" value="How come I have never heard of it?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.5.line.1.1.1" value="You're probably too young to be interested in science." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.5.response.1.1.1" value="Cool. What are you guys working on?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.5.line.1.1.1.1" value="We are building a robot that helps people learn English." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.5.response.1.1.1.1" value="Very cool." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+	<element ref="NPC.5.response.2" value="What do you do here?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.5.line.2.1" value="I am the head scientist here, and I oversee the laboratory." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.5.response.2.1" value="Can you make me a potion to turn me into a dragon?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.5.line.2.1.1" value="Ah sorry, we just ran out of dragon juice. Maybe next time." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.5.response.2.1.1" value="I will come back tomorrow." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.5.response.2.2" value="Someday, I want to be a scientist too!" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.5.line.2.2.1" value="That is great to hear! Study hard in school and I am sure you will be able to." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.5.response.2.2.1" value="I always try my best!" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+	<element ref="NPC.5.response.3" value="Your glasses look funny." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.5.line.3.1" value="I'm really busy, can you find someone else to bother?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.5.response.3.1" value="Sure, I will go bother the other scientist." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
 		
-	<element ref="NPC.6.line.1" value="Hello there. How are you doing today?" />
-	<element ref="NPC.6.response.1" value="I'm great! How about you?" />
-		<element ref="NPC.6.line.1.1" value="Just waiting for my son to finish his homework." />
+	<element ref="NPC.5.line1.1" value="Welcome to the Laboratory. Can I help you find something?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+	<element ref="NPC.5.response1.1" value="Are you Dr. Neal?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.5.line1.1.1" value="No I am Dr. Steven. Dr. Neal is over there by the bookshelf." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.5.response1.1.1" value="Thanks! I need to speak to him." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		
+	<element ref="NPC.6.line.1" value="Hello there. How are you doing today?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+	<element ref="NPC.6.response.1" value="I'm well. Can I go up to see Sophie?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.6.line.1.1" value="Sure, but not for long. She is studying for a big math test tomorrow." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.6.response.1.1" value="Okay, I will just say hi!" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		
+	<element ref="NPC.6.line1.1" value="Hey there, what are you up to today?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+	<element ref="NPC.6.response1.1" value="Just exploring. Are you Dr. Neal?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.6.line1.1.1" value="No, I am Sophie's dad." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.6.response1.1.1" value="Oh okay." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+		<element ref="NPC.6.response1.1.2" value="Are you sure you're not Dr. Neal?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.6.line1.1.2.1" value="Yes, I am certain." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+			<element ref="NPC.6.response1.1.2.1" value="........ are you Dr. Neal now?" type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+				<element ref="NPC.6.line1.1.2.1.1" value="No! you should go check the laboratory if you are looking for a 'Dr. Neal'." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
+				<element ref="NPC.6.response1.1.2.1.1" value="Ok thanks." type="Audi" file="../src/audio/NPC.2.line.1.mp3" />
 	
 	<element ref="sign.1" value="Your House" x="15" y="12" />
-	<element ref="sign.2" value="Some other persons house" x="20" y="12" />
-	<element ref="sign.3" value="Pallet Town Square" x="23" y="17" />
-	<element ref="sign.4" value="Pallet Town Lab" x="14" y="21" />
+	<element ref="sign.2" value="Sophie's House" x="20" y="12" />
+	<element ref="sign.3" value="Town Square" x="23" y="17" />
+	<element ref="sign.4" value="The Laboratory" x="14" y="21" />
 </strings>

@@ -122,7 +122,7 @@ package  {
 			var key:int = int(Math.random() * 5 + 1);
 			for each (dataElement in dataList)
 				if (String(dataElement.@ref) == "NPC.0.goodbye" + key){
-					strings.push(String(dataElement.@value));
+					//strings.push(String(dataElement.@value));
 					return strings;
 				}
 			return strings;
