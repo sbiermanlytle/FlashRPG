@@ -48,6 +48,15 @@ package  {
 			mPlayer = new Player(this, 0, mLevel.mLocation, new Point(5, 3), GameWorld.DOWN);
 			add(mPlayer);
 			mLevel.occupyCoordinate(mPlayer.mCoordinate, mPlayer.mID);
+			
+			var startPoint:Point = new Point(0,2);
+			var endPoint:Point = new Point(8,7);
+			var testPath:Array = generatePath(startPoint, endPoint);
+			
+			trace("Minimum path of size " + testPath.length + " found! Path is...");
+			for (var step:int = 0; step < testPath.length; step++) {
+				trace("Step " + step + ": " + "(" + testPath[step].getX() + "," + testPath[step].getY() + ")"); 
+			}
 		}
 		
 		override public function update():void {
@@ -65,6 +74,120 @@ package  {
 					remove(mMapAnimations[i]);
 					mMapAnimations.splice(i, 1);
 				}
+			}
+		}
+		
+		//generatePath algorithm to create shortest path from interaction
+		//point A to interaction point B;has yet to be integrated into main code
+		private function generatePath(start:Point, end:Point):Array {
+			var movementPath:Array = new Array();
+			var queueArray:Array = new Array();
+			var visitedArray:Array = new Array();
+			var endPoint:Boolean = false;
+			
+			for (var xPointer:int = 0; xPointer < mLevel.getLevelGridWidth(); xPointer++) {
+				var visitedColumn:Array = new Array();
+				for (var yPointer:int = 0; yPointer < mLevel.getLevelGridHeight(); yPointer++) {
+					visitedColumn[yPointer] = false;
+				}
+				visitedArray[xPointer] = visitedColumn;
+			}
+			
+			var currentPoint:PointNode = new PointNode(start);
+			visitedArray[currentPoint.getX()][currentPoint.getY()] = true;
+			
+			if (currentPoint.getX() == end.x && currentPoint.getY() == end.y) {
+				endPoint = true;
+			}
+			
+			if (currentPoint.getX() - 1 >= 0) {
+				if (mLevel.getCoordinateData(currentPoint.getX() - 1, currentPoint.getY()) == Level.PASSABLE && ! visitedArray[currentPoint.getX() - 1][currentPoint.getY()]) {
+					var leftPoint:PointNode = new PointNode(new Point(currentPoint.getX() - 1, currentPoint.getY()));
+					leftPoint.setPrecursor(currentPoint);
+					queueArray.push(leftPoint); 
+			}
+			}
+			
+			if (currentPoint.getX() + 1 < mLevel.getLevelGridWidth()) {
+				if (mLevel.getCoordinateData(currentPoint.getX() + 1, currentPoint.getY()) == Level.PASSABLE && ! visitedArray[currentPoint.getX() + 1][currentPoint.getY()]) {
+					var rightPoint:PointNode = new PointNode(new Point(currentPoint.getX() + 1, currentPoint.getY()));
+					rightPoint.setPrecursor(currentPoint);
+					queueArray.push(rightPoint); 
+			}
+			}
+			
+			if (currentPoint.getY() - 1 >= 0) {
+				if (mLevel.getCoordinateData(currentPoint.getX(), currentPoint.getY() - 1) == Level.PASSABLE && ! visitedArray[currentPoint.getX()][currentPoint.getY() - 1]) {
+					var upPoint:PointNode = new PointNode(new Point(currentPoint.getX(), currentPoint.getY() - 1));
+					upPoint.setPrecursor(currentPoint);
+					queueArray.push(upPoint); 
+			}
+			}
+			
+			if (currentPoint.getY() + 1 < mLevel.getLevelGridHeight()) {
+				if (mLevel.getCoordinateData(currentPoint.getX(), currentPoint.getY() + 1) == Level.PASSABLE && ! visitedArray[currentPoint.getX()][currentPoint.getY() + 1]) {
+					var downPoint:PointNode = new PointNode(new Point(currentPoint.getX(), currentPoint.getY() + 1));
+					downPoint.setPrecursor(currentPoint);
+					queueArray.push(downPoint); 
+			}
+			}
+			
+			while (queueArray.length != 0 && ! endPoint) {
+				currentPoint = queueArray.shift();
+				
+				if (currentPoint.getX() == end.x && currentPoint.getY() == end.y) {
+					endPoint = true;
+				}
+				
+				if (currentPoint.getX() - 1 >= 0) {
+					if (mLevel.getCoordinateData(currentPoint.getX() - 1, currentPoint.getY()) == Level.PASSABLE && ! visitedArray[currentPoint.getX() - 1][currentPoint.getY()]) {
+						leftPoint = new PointNode(new Point(currentPoint.getX() - 1, currentPoint.getY()));
+						leftPoint.setPrecursor(currentPoint);
+						visitedArray[leftPoint.getX()][leftPoint.getY()] = true;
+						queueArray.push(leftPoint); 
+				}
+				}
+				
+				if (currentPoint.getX() + 1 < mLevel.getLevelGridWidth()) {
+					if (mLevel.getCoordinateData(currentPoint.getX() + 1, currentPoint.getY()) == Level.PASSABLE && ! visitedArray[currentPoint.getX() + 1][currentPoint.getY()]) {
+						rightPoint = new PointNode(new Point(currentPoint.getX() + 1, currentPoint.getY()));
+						rightPoint.setPrecursor(currentPoint);
+						visitedArray[rightPoint.getX()][rightPoint.getY()] = true;
+						queueArray.push(rightPoint); 
+				}
+				}
+				
+				if (currentPoint.getY() - 1 >= 0) {
+					if (mLevel.getCoordinateData(currentPoint.getX(), currentPoint.getY() - 1) == Level.PASSABLE && ! visitedArray[currentPoint.getX()][currentPoint.getY() - 1]) {
+						upPoint = new PointNode(new Point(currentPoint.getX(), currentPoint.getY() - 1));
+						upPoint.setPrecursor(currentPoint);
+						visitedArray[upPoint.getX()][upPoint.getY()] = true;
+						queueArray.push(upPoint); 
+				}
+				}
+				
+				if (currentPoint.getY() + 1 < mLevel.getLevelGridHeight()) {
+					if (mLevel.getCoordinateData(currentPoint.getX(), currentPoint.getY() + 1) == Level.PASSABLE && ! visitedArray[currentPoint.getX()][currentPoint.getY() + 1]) {
+						downPoint = new PointNode(new Point(currentPoint.getX(), currentPoint.getY() + 1));
+						downPoint.setPrecursor(currentPoint);
+						visitedArray[downPoint.getX()][downPoint.getY()] = true;
+						queueArray.push(downPoint); 
+				}
+				}
+			}	
+			
+			if (endPoint) {
+				movementPath.unshift(currentPoint);
+				while (currentPoint.getPrecursor() != null) {
+					movementPath.unshift(currentPoint.getPrecursor());
+					currentPoint = currentPoint.getPrecursor();
+				}
+				
+				return movementPath;
+			}
+			
+			else {
+				return null;
 			}
 		}
 		

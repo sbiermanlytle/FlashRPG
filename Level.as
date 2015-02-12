@@ -191,5 +191,13 @@ package  {
 				}
 			return output;
 		}
+		
+		public function getLevelGridWidth():int {
+			return mLevelGrid.length;
+		}
+		
+		public function getLevelGridHeight():int {
+			return mLevelGrid[0].length;
+		}
 	}
 }
